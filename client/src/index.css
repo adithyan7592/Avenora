@@ -17,14 +17,18 @@ body {
 
 @layer components {
   .nav-link {
-    @apply relative text-[13px] font-medium tracking-[0.04em] text-teal/80 transition-colors hover:text-teal;
-  }
+  @apply relative text-[13px] font-medium tracking-[0.04em] text-teal/80 transition-colors hover:text-teal;
+}
 
-  .nav-link.active::after,
-  .nav-link:hover::after {
-    content: "";
-    @apply absolute -bottom-1 left-0 h-[2px] w-full bg-gold;
-  }
+.nav-link::after {
+  content: "";
+  @apply absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold transition-transform duration-300 ease-out;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  @apply scale-x-100;
+}
 
   .gold-kicker {
     @apply text-[11px] font-semibold tracking-[0.22em] text-gold uppercase sm:tracking-[0.28em];
@@ -40,5 +44,53 @@ body {
 
   .btn-teal {
     @apply inline-flex items-center justify-center gap-2 rounded-sm bg-teal px-7 py-3.5 text-[13px] font-semibold tracking-wide text-white transition hover:bg-teal-mid;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes crossfade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-crossfade {
+  animation: crossfade 0.35s ease-out both;
+}
+
+.animate-ken-burns {
+  animation: ken-burns 12s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-crossfade,
+  .animate-ken-burns {
+    animation: none !important;
   }
 }

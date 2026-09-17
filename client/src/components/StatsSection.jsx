@@ -1,4 +1,6 @@
 import { Users, Building2, Briefcase, Award } from "lucide-react";
+import useInView from "../hooks/useInView.js";
+import useCountUp from "../hooks/useCountUp.js";
 
 const icons = {
   users: Users,
@@ -7,10 +9,28 @@ const icons = {
   award: Award,
 };
 
+function StatItem({ item, index, start }) {
+  const Icon = icons[item.icon] || Award;
+  const display = useCountUp(item.value, { start, duration: 1400 + index * 150 });
+
+  return (
+    <div>
+      <Icon className="mb-3 text-gold" size={28} />
+      <p className="font-serif text-4xl text-gold">{display}</p>
+      <p className="mt-1 text-sm text-white/80">{item.label}</p>
+    </div>
+  );
+}
+
 export default function StatsSection({ stats }) {
+  const [ref, inView] = useInView({ threshold: 0.35 });
+
   return (
     <section className="bg-teal py-20 text-white">
-      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 lg:grid-cols-2 lg:px-8">
+      <div
+        ref={ref}
+        className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 lg:grid-cols-2 lg:px-8"
+      >
         <div>
           <p className="gold-kicker">Why Choose AVENORA? —</p>
           <h2 className="mt-3 font-serif text-4xl lg:text-5xl">
@@ -28,16 +48,9 @@ export default function StatsSection({ stats }) {
         </div>
 
         <div className="grid grid-cols-2 gap-8">
-          {stats.map((item) => {
-            const Icon = icons[item.icon] || Award;
-            return (
-              <div key={item.label}>
-                <Icon className="mb-3 text-gold" size={28} />
-                <p className="font-serif text-4xl text-gold">{item.value}</p>
-                <p className="mt-1 text-sm text-white/80">{item.label}</p>
-              </div>
-            );
-          })}
+          {stats.map((item, index) => (
+            <StatItem key={item.label} item={item} index={index} start={inView} />
+          ))}
         </div>
       </div>
     </section>

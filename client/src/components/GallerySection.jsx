@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
 import { galleryItems } from "../data/gallery.js";
+import Reveal from "./Reveal.jsx";
 
 const filters = [
   { id: "all", label: "All" },
@@ -102,9 +103,10 @@ export default function GallerySection({
               className="group relative block w-full"
             >
               <img
+                key={spot}
                 src={spotlight.src}
                 alt={spotlight.alt}
-                className="h-[280px] w-full object-cover transition duration-700 group-hover:scale-[1.03] sm:h-[380px] lg:h-[460px]"
+                className="h-[280px] w-full origin-center animate-ken-burns object-cover sm:h-[380px] lg:h-[460px]"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-teal via-teal/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-4 p-5 sm:p-8">
@@ -153,9 +155,11 @@ export default function GallerySection({
           {(compact ? items : rest).map((item, index) => {
             const openIndex = compact ? index : index + 1;
             return (
-              <button
+              <Reveal
                 key={item.id}
+                as="button"
                 type="button"
+                delay={index * 80}
                 onClick={() => setActive(openIndex)}
                 className={`group relative overflow-hidden rounded-sm bg-white text-left shadow-card ${spanClass(
                   item.span,
@@ -175,7 +179,7 @@ export default function GallerySection({
                 <span className="absolute right-3 top-3 rounded-full bg-white/90 p-1.5 text-teal opacity-0 transition group-hover:opacity-100">
                   <Maximize2 size={14} />
                 </span>
-              </button>
+              </Reveal>
             );
           })}
         </div>
@@ -226,9 +230,10 @@ export default function GallerySection({
               <ChevronLeft />
             </button>
             <img
+              key={active}
               src={current.src}
               alt={current.alt}
-              className="max-h-[70vh] max-w-full rounded-sm object-contain shadow-2xl ring-1 ring-gold/30"
+              className="max-h-[70vh] max-w-full animate-crossfade rounded-sm object-contain shadow-2xl ring-1 ring-gold/30"
             />
             <button
               type="button"

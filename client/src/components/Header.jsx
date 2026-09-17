@@ -55,22 +55,26 @@ export default function Header() {
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-teal/10 bg-white px-5 py-4 lg:hidden">
-          <nav className="flex flex-col gap-3">
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className={`text-sm font-medium ${pathname === link.to ? "text-gold" : "text-teal"}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      <div
+        className={`grid overflow-hidden bg-white transition-[grid-template-rows,opacity] duration-300 ease-out lg:hidden ${
+          open
+            ? "grid-rows-[1fr] border-t border-teal/10 opacity-100"
+            : "grid-rows-[0fr] border-t border-transparent opacity-0"
+        }`}
+      >
+        <nav className="flex min-h-0 flex-col gap-3 overflow-hidden px-5 py-4">
+          {links.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setOpen(false)}
+              className={`text-sm font-medium ${pathname === link.to ? "text-gold" : "text-teal"}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }
