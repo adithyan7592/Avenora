@@ -81,15 +81,18 @@ export default function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-white/75">
             <li className="flex items-start gap-2">
               <MapPin size={16} className="mt-0.5 text-gold" />
-              Kerala &amp; across India
+              <span>
+                Patrim House , 3rd floor
+                Soubagya nagar road , Trikakkara PO, Ernakulam, Kerala : 682021
+              </span>
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} className="text-gold" />
-              <a href="tel:+910000000000">+91 00000 00000</a>
+              <a href="tel:+918891224417">+91 8891224417</a>
             </li>
             <li className="flex items-center gap-2">
               <Mail size={16} className="text-gold" />
-              <a href="mailto:hello@avenora.in">hello@avenora.in</a>
+              <a href="mailto:avenoraconsultants@outlook.com">avenoraconsultants@outlook.com</a>
             </li>
           </ul>
           <div className="mt-5 flex gap-3 text-gold">
