@@ -4,7 +4,7 @@ const articles = [
     text: "What recruiters look for, how to structure your CV, and how to practise interviews with confidence.",
   },
   {
-    title: "Choosing the right course after Plus Two",
+    title: "Choosing the right course after Plus Two and Graduation",
     text: "A practical way to match Nursing, Paramedical, Engineering and Degree options with your goals.",
   },
   {
